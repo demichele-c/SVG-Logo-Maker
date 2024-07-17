@@ -6,6 +6,10 @@
 
 The SVG Logo Maker is a command-line application designed to help freelance web developers quickly generate simple logos for their projects, eliminating the need to hire a graphic designer. By prompting users for text, text color, shape type (circle, triangle, or square), and shape color, the application creates a customized SVG logo based on their input. Using Inquirer for user prompts and Jest for unit testing, the application ensures a user-friendly experience and robust functionality. The generated logos are saved in an 'examples' directory, providing a convenient and organized way to manage output files.
 
+## Video Demo
+
+Watch a demo of the project [here](https://drive.google.com/file/d/1Q-uZY7XFJM6BA5AVtIk9rvbrjVcoJArp/preview)
+
 ## Table of Contents
 
 - [Installation](#installation)
