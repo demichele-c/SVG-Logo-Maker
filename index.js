@@ -26,22 +26,27 @@ function promptUser() {
             type: 'input',
             name: 'shapeColor',
             message: 'Enter the shape color (keyword or hexadecimal):'
+        },
+        {
+            type: 'input',
+            name: 'filename',
+            message: 'Enter a filename (without extension, .svg will be added):'
         }
     ]);
 }
+
 promptUser().then(answers => {
-    const svgContent = generateSVG(answers);
-    
-    // Ensure the 'examples' folder exists
+    const { text, textColor, shape, shapeColor, filename } = answers;
+    const { filename: generatedFilename, content } = generateSVG({ text, textColor, shape, shapeColor, filename });
+
     const examplesDir = path.join(__dirname, 'examples');
     if (!fs.existsSync(examplesDir)) {
         fs.mkdirSync(examplesDir);
     }
-    
-    // Write the SVG content to 'examples/logo.svg'
-    const filePath = path.join(examplesDir, 'logo.svg');
-    fs.writeFileSync(filePath, svgContent);
-    console.log('Generated logo.svg in examples folder');
+
+    const filePath = path.join(examplesDir, generatedFilename);
+    fs.writeFileSync(filePath, content);
+    console.log(`Generated ${generatedFilename} in examples folder`);
 }).catch(error => {
     console.error('Error generating logo:', error);
 });
