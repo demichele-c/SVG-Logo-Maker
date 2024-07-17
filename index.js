@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const path = require('path');
 const generateSVG = require('./lib/generateLogo');
 
 function promptUser() {
@@ -28,11 +29,19 @@ function promptUser() {
         }
     ]);
 }
-
 promptUser().then(answers => {
     const svgContent = generateSVG(answers);
-    fs.writeFileSync('logo.svg', svgContent);
-    console.log('Generated logo.svg');
+    
+    // Ensure the 'examples' folder exists
+    const examplesDir = path.join(__dirname, 'examples');
+    if (!fs.existsSync(examplesDir)) {
+        fs.mkdirSync(examplesDir);
+    }
+    
+    // Write the SVG content to 'examples/logo.svg'
+    const filePath = path.join(examplesDir, 'logo.svg');
+    fs.writeFileSync(filePath, svgContent);
+    console.log('Generated logo.svg in examples folder');
 }).catch(error => {
     console.error('Error generating logo:', error);
 });
