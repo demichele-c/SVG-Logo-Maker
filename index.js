@@ -1,4 +1,3 @@
-
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateSVG = require('./lib/generateLogo');
@@ -34,4 +33,6 @@ promptUser().then(answers => {
     const svgContent = generateSVG(answers);
     fs.writeFileSync('logo.svg', svgContent);
     console.log('Generated logo.svg');
+}).catch(error => {
+    console.error('Error generating logo:', error);
 });
